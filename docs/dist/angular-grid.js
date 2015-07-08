@@ -5281,9 +5281,10 @@ var awk;
             // private
             InMemoryRowController.prototype.aggregateRowForQuickFilter = function (node) {
                 var aggregatedText = '';
+                var that = this;
                 this.columnModel.getAllColumns().forEach(function (colDefWrapper) {
                     var data = node.data;
-                    var value = data ? data[colDefWrapper.colDef.field] : null;
+                    var value = that.getValue(data, colDefWrapper.colDef, node);
                     if (value && value !== '') {
                         aggregatedText = aggregatedText + value.toString().toUpperCase() + "_";
                     }
